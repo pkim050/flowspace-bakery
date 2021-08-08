@@ -1,3 +1,5 @@
+- if browser.device.mobile?
+  = link_to "Prepare Cookie(s)", new_oven_cookies_path(@oven), class: 'button'
 %h3= @oven.name
 
 .cookie-info
@@ -18,8 +20,8 @@
     None
 
 %br
-
-= link_to "Prepare Cookie(s)", new_oven_cookies_path(@oven), class: 'button'
+- if !browser.device.mobile?
+  = link_to "Prepare Cookie(s)", new_oven_cookies_path(@oven), class: 'button'
 
 :javascript
   $(document).ready( function() {

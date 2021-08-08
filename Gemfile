@@ -51,6 +51,9 @@ gem 'puma', '~> 3.7'
 # Use Sidekiq for background jobs
 gem 'sidekiq'
 
+# Use Browser to check what type of device the user is using
+gem "browser"
+
 group :development do
   gem 'selenium-webdriver'
   gem 'listen', '>= 3.0.5', '< 3.2'
