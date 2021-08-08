@@ -5,14 +5,25 @@
   - if @oven.cookie
     - if @oven.cookie.fillings.empty?
       1 cookie with no fillings
+      %br
     - else
       1 cookie with #{@oven.cookie.fillings}
+      %br
     - if @oven.cookie.ready?
-      (Your Cookie is Ready)
+      Your cookie is now ready!
       = button_to "Retrieve Cookie", empty_oven_path, class: 'button tiny'
+    - else
+      Your cookie is currently baking to perfection, please wait while it completes, the page will update automatically for you.
   - else
     None
 
 %br
 
 = link_to "Prepare Cookie", new_oven_cookies_path(@oven), class: 'button'
+
+:javascript
+  $(document).ready( function() {
+    window.setTimeout(function () {
+      window.location.reload();
+    }, 30000);
+    } );
