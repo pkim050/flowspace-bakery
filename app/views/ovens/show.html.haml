@@ -2,14 +2,28 @@
 
 .cookie-info
   Cookie in oven:
-  - if @oven.cookie
-    1 cookie with #{@oven.cookie.fillings || "no fillings"}
-    - if @oven.cookie.ready?
-      (Your Cookie is Ready)
+  - if @oven.cookies.present?
+    - if @oven.cookies.first.fillings.empty?
+      #{pluralize(@oven.cookies.count, "cookie")} with no fillings
+      %br
+    - else
+      #{pluralize(@oven.cookies.count, "cookie")} with #{@oven.cookies.first.fillings}
+      %br
+    - if @oven.cookies.first.ready?
+      Your cookie(s) is/are now ready!
       = button_to "Retrieve Cookie", empty_oven_path, class: 'button tiny'
+    - else
+      Your cookie(s) is/are currently baking to perfection, please wait while it completes, the page will update automatically for you.
   - else
     None
 
 %br
 
-= link_to "Prepare Cookie", new_oven_cookies_path(@oven), class: 'button'
+= link_to "Prepare Cookie(s)", new_oven_cookies_path(@oven), class: 'button'
+
+:javascript
+  $(document).ready( function() {
+    window.setTimeout(function () {
+      window.location.reload();
+    }, 30000);
+    } );
