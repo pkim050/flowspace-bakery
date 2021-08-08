@@ -4,6 +4,8 @@ class Cookie < ActiveRecord::Base
   validates :storage, presence: true
 
   def ready?
-    true
+    #binding.pry
+    return true if self.status == "ready"
+    return false
   end
 end
