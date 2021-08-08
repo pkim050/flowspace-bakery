@@ -100,8 +100,8 @@ describe OvensController do
         cookie = FactoryGirl.create(:cookie, storage: oven)
 
         the_request
-
-        expect(oven.cookie).to be_nil
+        
+        expect(oven.cookies.take).to be_nil
         expect(user.stored_cookies.to_a).to match_array([cookie])
       end
 
